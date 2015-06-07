@@ -1,0 +1,18 @@
+<%= link_to "Create new article", new_article_path %>
+
+<% if @articles.present? %>
+  <h2> Articles <h2>
+  <table border="1" >
+    <th> id </th>
+    <th> title </th>
+    <th> content </th>
+  
+    <% @articles.each do |article| %>
+      <tr>
+        <td> <%= article.id %> </td>
+        <td> <%= article.title %> </td>
+        <td> <%= article.content %> </td>
+      </tr>
+    <% end %>
+  </table>
+<% end %>

@@ -43,3 +43,9 @@ group :development, :test do
   gem 'spring'
 end
 
+group :test do
+  gem 'rspec-rails', '3.2.2'
+  gem 'factory_girl', '4.5.0'
+  gem "capybara-webkit", '1.5.1'
+end
+
