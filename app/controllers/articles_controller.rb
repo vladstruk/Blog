@@ -1,6 +1,6 @@
 class ArticlesController < ApplicationController
 	
-    before_filter :find_article, only: [:edit, :update, :destroy]
+    before_filter :find_article, only: [:show, :edit, :update, :destroy]
 
 	def index
       @articles = Article.all
@@ -19,9 +19,6 @@ class ArticlesController < ApplicationController
 	  	flash[:error] = "None of article fields can be blank!"
 	  	render :new
 	  end
-	end
-
-	def edit
 	end
 
 	def update

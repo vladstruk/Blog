@@ -12,7 +12,7 @@
     <% @articles.each do |article| %>
       <tr id="article_<%= article.id %>">
         <td> <%= article.id %> </td>
-        <td> <%= article.title %> </td>
+        <td> <%= link_to article.title, article_path(article) %> </td>
         <td> <%= article.content %> </td>
         <td> <%= link_to "Edit", edit_article_path(article) %> </td>
         <td> <%= link_to "Delete", article_path(article), method: :delete %> </td>

@@ -81,6 +81,17 @@ describe "Articles" do
 	  	end
 	    expect(page).to have_content("Article #{article.title} has been just deleted.")
 	  end
+      
+      #show
+	  it "should have all article attributes content", js: true do
+	  	visit articles_path
+	  	within "#article_#{article.id}" do
+	  	  click_on article.title
+	  	end
+	    expect(page).to have_content(article.id)
+	    expect(page).to have_content(article.title)
+	    expect(page).to have_content(article.content)
+	  end
     end
 
 end
