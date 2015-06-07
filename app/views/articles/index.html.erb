@@ -10,7 +10,7 @@
     <th> </th>
   
     <% @articles.each do |article| %>
-      <tr>
+      <tr id="article_<%= article.id %>">
         <td> <%= article.id %> </td>
         <td> <%= article.title %> </td>
         <td> <%= article.content %> </td>

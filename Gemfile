@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-
+gem 'pry'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.1'
 # Use postgresql as the database for Active Record
@@ -47,5 +47,7 @@ group :test do
   gem 'rspec-rails', '3.2.2'
   gem 'factory_girl', '4.5.0'
   gem "capybara-webkit", '1.5.1'
+  gem 'selenium-webdriver'
+  gem 'database_cleaner', '1.4.1'
 end
 
