@@ -13,6 +13,7 @@ class ArticlesController < ApplicationController
 	  	flash[:notice] = "New article added"
 	  	redirect_to articles_path
 	  else
+	  	flash[:error] = "None of article fields can be blank"
 	  	render :new
 	  end
 	end
