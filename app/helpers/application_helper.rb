@@ -2,8 +2,7 @@ module ApplicationHelper
 
 	def sort_by_field field
       if field == params[:field]
-      	#direction = { 'asc' => 'desc', 'desc' => 'asc', nil => 'asc' }[params[:direction]]
-        params[:direction] == 'asc' ? direction = 'desc' : direction = 'asc'
+        direction = params[:direction] == 'asc' ? 'desc' : 'asc'
 	    arrow = {'asc' => '&#8593;', 'desc' => '&#8595;'}[direction]
 	    link_to "#{field} #{arrow}".html_safe, articles_path(field: field, direction: direction)
 	  else

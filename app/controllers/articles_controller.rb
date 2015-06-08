@@ -4,8 +4,7 @@ class ArticlesController < ApplicationController
 
 	def index
 	  @article = Article.new
-	  sql = Article.safe_sql params
-      @articles = Article.order(sql)
+      @articles = Article.order_by(params)
 	end
 
 	def create
@@ -17,6 +16,11 @@ class ArticlesController < ApplicationController
 	  	flash[:error] = "None of article fields can be blank!"
 	  	render :index
 	  end
+	end
+
+	def show
+	  @comment = Comment.new
+	  @comments = Comment.all
 	end
 
 	def update
