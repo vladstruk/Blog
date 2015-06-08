@@ -1,16 +1,17 @@
 require "rails_helper"
 
 describe "Articles" do
+	before do
+      visit articles_path
+	end
 
     #index
 	it "should have title Articles", js: true do
-	  visit articles_path
 	  expect(page).to have_content("Create new article")
 	end
 
     #new
 	it "should have content new article added if article data is valid", js: true do
-	  visit new_article_path
 	  fill_in "Title", with: "Title"
 	  fill_in "Content", with: "Content"
 	  click_button("Create Article")
@@ -18,14 +19,12 @@ describe "Articles" do
 	end
 
 	it "should have have error message if article data is invalid", js: true do
-	  visit new_article_path
 	  fill_in "Content", with: "Content"
 	  click_button("Create Article")
 	  expect(page).to have_content("None of article fields can be blank")
 	end
 
 	it "should have have error message if article data is invalid", js: true do
-	  visit new_article_path
 	  fill_in "Title", with: "Title"
 	  click_button("Create Article")
 	  expect(page).to have_content("None of article fields can be blank")
@@ -37,9 +36,12 @@ describe "Articles" do
 	  let!(:article) { Article.create(title: "Title", content: "Content") }
       let!(:article2) { Article.create(title: "Title2", content: "Content2") }
 
+      before do
+        visit articles_path
+	  end
+
       #edit
 	  it "should have notice of updating if article data is valid", js: true do
-	  	visit articles_path
 	  	within "#article_#{article.id}" do
 	  	  click_on 'Edit'
 	  	end
@@ -50,7 +52,6 @@ describe "Articles" do
 	  end
   
 	  it "should have have error message if article data is invalid", js: true do
-	  	visit articles_path
 	  	within "#article_#{article.id}" do
 	  	  click_on 'Edit'
 	  	end
@@ -62,7 +63,6 @@ describe "Articles" do
 	  end
   
 	  it "should have have error message if article data is invalid", js: true do
-	  	visit articles_path
 	  	within "#article_#{article.id}" do
 	  	  click_on 'Edit'
 	  	end
@@ -75,7 +75,6 @@ describe "Articles" do
       
       #delete
       it "should have notice of deleting article", js: true do
-	  	visit articles_path
 	  	within "#article_#{article.id}" do
 	  	  click_on 'Delete'
 	  	end
@@ -84,7 +83,6 @@ describe "Articles" do
       
       #show
 	  it "should have all article attributes content", js: true do
-	  	visit articles_path
 	  	within "#article_#{article.id}" do
 	  	  click_on article.title
 	  	end

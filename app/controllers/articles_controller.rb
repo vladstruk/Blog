@@ -3,11 +3,9 @@ class ArticlesController < ApplicationController
     before_filter :find_article, only: [:show, :edit, :update, :destroy]
 
 	def index
-      @articles = Article.all
-	end
-
-	def new
 	  @article = Article.new
+	  sql = Article.safe_sql params
+      @articles = Article.order(sql)
 	end
 
 	def create
@@ -17,7 +15,7 @@ class ArticlesController < ApplicationController
 	  	redirect_to articles_path
 	  else
 	  	flash[:error] = "None of article fields can be blank!"
-	  	render :new
+	  	render :index
 	  end
 	end
 
@@ -41,7 +39,7 @@ class ArticlesController < ApplicationController
 	private
 
 	def articles_params
-	  params.require(:article).permit(:id, :title, :content)
+	  params.require(:article).permit(:title, :content)
 	end
 
 	def find_article

@@ -1,11 +1,12 @@
-<%= link_to "Create new article", new_article_path %>
+<h3> Create new article </h3>
+<%= render "form" %>
 
 <% if @articles.present? %>
   <h2> Articles <h2>
   <table>
-    <th> id </th>
-    <th> title </th>
-    <th> content </th>
+    <th> <%= sort_by_field "Id" %> </th>
+    <th> <%= sort_by_field "Title" %> </th>
+    <th> <%= sort_by_field "Content" %> </th>
     <th> </th>
     <th> </th>
   
