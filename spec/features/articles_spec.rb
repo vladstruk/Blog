@@ -100,7 +100,8 @@ describe "Articles" do
 	      expect(page).to have_content(article.content)
 	    end
 	  end
-
+      
+      #TODO with regular expression
       describe "#sort_by_field" do
   
         it "should have ascending order in id field" do

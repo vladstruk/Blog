@@ -20,7 +20,6 @@ class ArticlesController < ApplicationController
 
 	def show
 	  @comment = Comment.new
-	  @comments = Comment.all
 	end
 
 	def update

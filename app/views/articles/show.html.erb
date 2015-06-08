@@ -5,15 +5,17 @@
 <p> Content: <%= @article.content %> </p>
 
 
-<% if @comments.present? %>
+<% if @article.comments.present? %>
   <h3> Comments </h3>
   <table>
     <th> Id </th>
     <th> Content </th>
-    <% @comments.each do |comment| %>
+    <th> </th>
+    <% @article.comments.each do |comment| %>
       <tr>
         <td> <%= comment.id %> </td>
         <td> <%= comment.content %> </td>
+        <td> <%= link_to "Edit", edit_article_comment_path(@article, comment) %> </td>
       </tr>
     <% end %>
   </table>
