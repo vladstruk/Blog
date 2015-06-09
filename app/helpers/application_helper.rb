@@ -1,5 +1,11 @@
 module ApplicationHelper
 
+	def error_message field, object
+	  if message = object.errors.messages[field].first
+	  	"#{field.capitalize} #{message}"
+	  end
+	end
+
 	def sort_by_field field
       if field == params[:field]
         direction = params[:direction] == 'asc' ? 'desc' : 'asc'
