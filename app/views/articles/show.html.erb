@@ -11,11 +11,13 @@
     <th> Id </th>
     <th> Content </th>
     <th> </th>
+    <th> </th>
     <% @article.comments.each do |comment| %>
       <tr>
         <td> <%= comment.id %> </td>
         <td> <%= comment.content %> </td>
         <td> <%= link_to "Edit", edit_article_comment_path(@article, comment) %> </td>
+        <td> <%= link_to "Delete", article_comment_path(@article, comment), method: :delete %> </td>
       </tr>
     <% end %>
   </table>

@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
 
-	before_filter :find_comment, only: [:edit, :update]
+	before_filter :find_comment, only: [:edit, :update, :destroy]
 
    def create
    	 @article = Article.find_by_id(params[:article_id])
@@ -15,12 +15,16 @@ class CommentsController < ApplicationController
 
    def update
    	 if @comment.update_attributes(comments_params)
-   	   flash[:notice] = "Comment has been just edited."
    	   redirect_to article_path(@comment.article)
    	 else
    	   flash[:error] = "Content field can't be blank!"
    	   render :edit
    	 end
+   end
+
+   def destroy
+   	 @comment.destroy
+   	 redirect_to article_path(@comment.article)
    end
 
    private
