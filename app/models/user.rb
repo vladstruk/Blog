@@ -9,10 +9,11 @@ class User < ActiveRecord::Base
 
   before_save :encrypt_password
 
-  #def by_login_data params
-  #	return if User.find_by_email(params[:email])
-  #	user.salt = SecureRandom.hex
-  #end
+  def self.by_login_data params
+  	return unless user = User.find_by_email(params[:email])
+    encrypted_password = Encryptor.new(user.salt).encrypt(params[:password])
+    user if encrypted_password == user.password
+  end
 
   def encrypt_password
   	self.salt = SecureRandom.hex
