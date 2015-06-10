@@ -1,5 +1,7 @@
 class SessionsController < ApplicationController
 
+  skip_before_filter :login_required, only: [:new, :create]
+
   def create
     user = User.by_login_data(params[:session])
     if user.try(:active?)
@@ -14,7 +16,7 @@ class SessionsController < ApplicationController
 
   def destroy
     session[:user_id] = nil
-    flash[:notice] = "You logged out"
+    flash[:notice] = "You logged out."
     redirect_to new_session_path
   end
 	

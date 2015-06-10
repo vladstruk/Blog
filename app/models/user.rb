@@ -5,9 +5,9 @@ class User < ActiveRecord::Base
 
   validates :name, presence: true
   validates :email, presence: true, uniqueness: true, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, on: :create }
-  validates :password, presence: true, length: 3..20
+  validates :password, presence: true, length: 3..20, :if => :password_changed?
 
-  before_save :encrypt_password
+  before_save :encrypt_password, :if => :password_changed?
 
   def self.by_login_data params
   	return unless user = User.find_by_email(params[:email])
