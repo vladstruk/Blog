@@ -14,4 +14,8 @@ class ApplicationController < ActionController::Base
   def login_required
   	return unless current_user
   end
+
+  rescue_from CanCan::AccessDenied do |exception|
+    redirect_to articles_path, :alert => exception.message
+  end
 end

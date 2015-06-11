@@ -15,4 +15,8 @@ module ApplicationHelper
 	  	link_to "#{field} #{'&#8645;'}".html_safe, articles_path(field: field, direction: 'asc')
 	  end
 	end
+
+	#def roles
+	#  select("roles", User::ROLES.collect!.with_index { |role, i| [role, i] }, { include_blank: true })
+	#end
 end

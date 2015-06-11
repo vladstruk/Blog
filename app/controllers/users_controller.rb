@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
 
 	skip_before_filter :login_required, only: [:new, :create, :activation]
+	authorize_resource only: [:index, :show]
 
     def index
       @users = User.all
@@ -30,9 +31,7 @@ class UsersController < ApplicationController
 
 	def activation
 	  user = User.find_by_activation_code(params[:activation_code])
-	  binding.pry
 	  if user.try(:update_attributes, active: true)
-	  		  binding.pry
 	  	session[:user_id] = user.id
 	  	flash[:notice] = "You activated your account successfully!"
         redirect_to articles_path

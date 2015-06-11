@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
 
+  ROLES = ["admin", "moderator", "blogger"]
+
   has_many :articles
   has_many :comments
 
@@ -8,6 +10,10 @@ class User < ActiveRecord::Base
   validates :password, presence: true, length: 3..20, :if => :password_changed?
 
   before_save :encrypt_password, :if => :password_changed?
+
+  def admin?
+    role == "admin"
+  end
 
   def self.by_login_data params
   	return unless user = User.find_by_email(params[:email])
