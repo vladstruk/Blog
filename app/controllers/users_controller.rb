@@ -5,7 +5,7 @@ class UsersController < ApplicationController
 	authorize_resource only: [:index, :show, :update]
 
     def index
-      @users = User.all
+      @users = User.paginate(page: params[:page], per_page: 3)
     end
 
 	def new
