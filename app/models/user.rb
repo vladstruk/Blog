@@ -11,9 +11,9 @@ class User < ActiveRecord::Base
 
   before_save :encrypt_password, :if => :password_changed?
 
-  User::ROLES.each do |role|
-    
-  end
+  #User::ROLES.each do |role|
+  #  define_method
+  #end
 
   def admin?
     role == "admin"

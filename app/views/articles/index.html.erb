@@ -1,9 +1,9 @@
-<h3> Create new article </h3>
+<h4> Create new article </h4>
 <%= render "form" %>
 
 <% if @articles.present? %>
-  <h2> Articles <h2>
-  <table>
+  <h4> Articles <h4>
+  <table class="table table-striped">
     <th> <%= sort_by_field "Id" %> </th>
     <th> <%= sort_by_field "Title" %> </th>
     <th> <%= sort_by_field "Content" %> </th>
