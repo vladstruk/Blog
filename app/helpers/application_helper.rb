@@ -16,7 +16,4 @@ module ApplicationHelper
 	  end
 	end
 
-	#def roles
-	#  select("roles", User::ROLES.collect!.with_index { |role, i| [role, i] }, { include_blank: true })
-	#end
 end

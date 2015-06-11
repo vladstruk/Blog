@@ -29,6 +29,12 @@ class UsersController < ApplicationController
 	  @user = User.find_by_id(params[:id])
 	end
 
+	def update
+	  @user = User.find_by_id(params[:id])
+	  @user.update_attributes(role: params[:user][:role])
+	  render :show
+	end
+
 	def activation
 	  user = User.find_by_activation_code(params[:activation_code])
 	  if user.try(:update_attributes, active: true)
