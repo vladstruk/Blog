@@ -1,10 +1,14 @@
 class CommentsController < ApplicationController
 
-	before_filter :find_comment, only: [:edit, :update, :destroy]
+  load_resource only: [:edit, :update, :destroy]
+  authorize_resource only: [:edit, :update, :destroy]
 
    def create
      @article = Article.find_by_id(params[:article_id])
+     #@article.comments << Comment.new(comments_params)
+     #@article.comments.last.user_id = current_user.id
      @comment = @article.comments.create(comments_params)
+     @comment.update_attributes(user_id: current_user.id)
      if @comment.new_record?
        flash[:error] = "Comment can't be blank"
      else
@@ -31,10 +35,6 @@ class CommentsController < ApplicationController
 
    def comments_params
 	  params.require(:comment).permit(:content)
-   end
-
-   def find_comment
-     @comment = Comment.find_by_id(params[:id])
    end
 
 end

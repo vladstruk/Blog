@@ -1,7 +1,8 @@
 class UsersController < ApplicationController
 
 	skip_before_filter :login_required, only: [:new, :create, :activation]
-	authorize_resource only: [:index, :show]
+	load_resource only: [:show, :update]
+	authorize_resource only: [:index, :show, :update]
 
     def index
       @users = User.all
@@ -12,25 +13,19 @@ class UsersController < ApplicationController
 	end
 
 	def create
-        @user = User.new(users_params)
-        @user.role = "blogger"
-        @user.activation_code = SecureRandom.hex
-        if @user.save
-        	flash[:notice] = "You signed up successfully! Use link in your email to confirm."
-
-        	UsersMailer.activate(@user).deliver
-        	redirect_to new_session_path
-        else
-        	render :new
-        end
-	end
-
-	def show
-	  @user = User.find_by_id(params[:id])
+      @user = User.new(users_params)
+      @user.role = "blogger"
+      @user.activation_code = SecureRandom.hex
+      if @user.save
+        flash[:notice] = "You signed up successfully! Use link in your email to confirm."
+        UsersMailer.activate(@user).deliver
+        redirect_to new_session_path
+      else
+        render :new
+      end
 	end
 
 	def update
-	  @user = User.find_by_id(params[:id])
 	  @user.update_attributes(role: params[:user][:role])
 	  render :show
 	end

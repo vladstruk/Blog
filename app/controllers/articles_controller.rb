@@ -1,6 +1,7 @@
 class ArticlesController < ApplicationController
 	
-    before_filter :find_article, only: [:show, :edit, :update, :destroy]
+    load_resource only: [:show, :edit, :update, :destroy]
+    authorize_resource only: [:edit, :update, :destroy]
 
 	def index
 	  @article = Article.new
@@ -8,7 +9,8 @@ class ArticlesController < ApplicationController
 	end
 
 	def create
-	  @article =  Article.new(articles_params)
+	  @article = Article.new(articles_params)
+	  @article.user_id = current_user.id
 	  if @article.save
 	  	flash[:notice] = "New article added."
 	  	redirect_to articles_path
@@ -42,10 +44,7 @@ class ArticlesController < ApplicationController
 	private
 
 	def articles_params
-	  params.require(:article).permit(:title, :content)
+	  params.require(:article).permit(:title, :content, :user_id)
 	end
 
-	def find_article
-	  @article = Article.find_by_id(params[:id])
-	end
 end
