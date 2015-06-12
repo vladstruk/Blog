@@ -11,4 +11,11 @@ class Article < ActiveRecord::Base
   	Article.order(sql)
   end
 
+  def self.search_by params
+  	articles = Article.all if params[:title].present? || params[:content].present?
+  	articles = articles.where("title LIKE ?", "%#{params[:title]}%") if params[:title].present?
+  	articles = articles.where("content LIKE ?", "%#{params[:content]}%") if params[:content].present?
+  	articles
+  end
+
 end

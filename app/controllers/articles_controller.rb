@@ -39,7 +39,14 @@ class ArticlesController < ApplicationController
        flash[:notice] = "Article #{@article.title} has been just deleted."
        redirect_to articles_path
 	end
-
+    
+    def search
+      @articles = Article.search_by(params[:article])
+	  unless @articles.present?
+	  	flash[:error] = "There is not article with such title or content."
+	  	redirect_to articles_path
+	  end
+	end
 
 	private
 

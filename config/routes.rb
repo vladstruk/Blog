@@ -54,12 +54,17 @@ Rails.application.routes.draw do
   #     resources :products
   #   end
 
-  resources :articles do
-    resources :comments
+  resources :articles, except: [:new] do
+    get :search, on: :collection
+    resources :comments, only: [:create, :edit, :update, :destroy]
   end
 
-  resources :users do
+  resources :users, only: [:new, :create] do
     get :activation, on: :collection
   end
   resources :sessions
+
+  namespace :admin do
+    resources :users, only: [:index, :show, :update]
+  end
 end

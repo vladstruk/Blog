@@ -1,12 +1,6 @@
 class UsersController < ApplicationController
 
 	skip_before_filter :login_required, only: [:new, :create, :activation]
-	load_resource only: [:show, :update]
-	authorize_resource only: [:index, :show, :update]
-
-    def index
-      @users = User.paginate(page: params[:page], per_page: 5)
-    end
 
 	def new
 	  @user = User.new
@@ -23,11 +17,6 @@ class UsersController < ApplicationController
       else
         render :new
       end
-	end
-
-	def update
-	  @user.update_attributes(role: params[:user][:role])
-	  render :show
 	end
 
 	def activation
