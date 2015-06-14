@@ -44,11 +44,11 @@ class ArticlesController < ApplicationController
 	end
     
     def search
-      @articles = Article.search_by(params[:article])
+      @articles = Article.search_by(params[:search])
 	  unless @articles.present?
 	  	flash[:error] = "There is not article with such title or content."
-	  	redirect_to articles_path
 	  end
+	  render :index
 	end
 
 	private
