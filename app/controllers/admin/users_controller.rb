@@ -8,7 +8,7 @@ class Admin::UsersController < ApplicationController
   end
 
   def update
-	@user.update_attributes(role: params[:user][:role])
+	@user.update_attributes(role: params[:user][:role], active: params[:user][:active])
 	render :show
   end
 end

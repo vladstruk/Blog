@@ -52,7 +52,7 @@ end
 
 group :test do
   gem 'rspec-rails', '3.2.2'
-  gem 'factory_girl', '4.5.0'
+  gem 'factory_girl_rails', '4.5.0'
   gem "capybara-webkit", '1.5.1'
   gem 'selenium-webdriver'
   gem 'database_cleaner', '1.4.1'

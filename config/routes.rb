@@ -54,7 +54,7 @@ Rails.application.routes.draw do
   #     resources :products
   #   end
 
-  resources :articles, except: [:new] do
+  resources :articles do
     get :search, on: :collection
     resources :comments, only: [:create, :edit, :update, :destroy]
   end

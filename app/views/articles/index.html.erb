@@ -1,9 +1,5 @@
-<h4> Create new article </h4>
-<%= render "form" %>
-<hr> </hr>
-
 <h4> Find article </h4>
-<%= form_for @article, url: search_articles_path, method: :get do |f| %>
+<%= form_for :article, url: search_articles_path, method: :get do |f| %>
   <p>
     <%= f.label :title %> </br>
     <%= f.text_field :title %>

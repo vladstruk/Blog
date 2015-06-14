@@ -14,6 +14,7 @@
 
 <ul class="nav nav-tabs nav-justified" role="tablist">
 <% if current_user %>
+  <li> <%=link_to "Create new article", new_article_path %>  </li>
   <li> <%=link_to "All articles", articles_path %>  </li>
   <% if can? :index, current_user %>
     <li> <%=link_to "All users", admin_users_path %>  </li>

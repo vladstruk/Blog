@@ -3,8 +3,11 @@ class ArticlesController < ApplicationController
     load_resource only: [:show, :edit, :update, :destroy]
     authorize_resource only: [:edit, :update, :destroy]
 
+    def new
+      @article = Article.new
+    end
+
 	def index
-	  @article = Article.new
       @articles = Article.order_by(params)
 	end
 
