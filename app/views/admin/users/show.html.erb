@@ -5,6 +5,6 @@
   Name: <%= f.label @user.name %> </br>
   Email: <%= f.label @user.email %> </br>
   <p> Role: <%= f.select :role, User::ROLES, selected: @user.role %> </p>
-  <p> Active: <%= f.select :active, [true, false], selected: @user.active? %> </p>
+  <p> Active: <%= f.check_box :active %> </p>
   <%= f.submit class: "btn btn-warning" %>
 <% end %>

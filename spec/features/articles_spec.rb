@@ -66,7 +66,7 @@ describe "Articles" do
 	      fill_in "Title", with: "Title"
 	      fill_in "Content", with: "Content"
 	      click_button("Update Article")
-	      expect(page).to have_content("Article #{article.title} has been just edited.")
+	      expect(page).to have_content("Article #{article.reload.title} has been just edited.")
 	    end
     
 	    it "should have have error message if article data is invalid", js: true do
