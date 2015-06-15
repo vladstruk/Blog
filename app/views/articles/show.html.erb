@@ -1,8 +1,17 @@
 <h3> Article <%= @article.title %> </h3>
+  Creator: <%= @article.user.name %> </br>
+  Id: <%= @article.id %> </br>
+  Title: <%= @article.title %> </br>
+  Content: <%= @article.content %> </br>
+  Category: <%= @article.categories.map(&:name).join(', ') if @article.categories.present? %> </br>
 
-<p> Id: <%= @article.id %> </p>
-<p> Title: <%= @article.title %> </p>
-<p> Content: <%= @article.content %> </p>
+<% if can? :create, ArticleCategory %>
+  <%= form_for ArticleCategory.new, url: article_article_categories_path(@article) do |f| %>
+    <%=f.label :add_category %>
+    <%= f.select :category, available_categories(@article) %> </br>
+    <%= f.submit "Add category", class: "btn btn-warning" %>
+  <% end %>
+<% end %>
 
 
 <% if @article.comments.present? %>

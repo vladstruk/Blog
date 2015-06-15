@@ -57,6 +57,8 @@ Rails.application.routes.draw do
   resources :articles do
     get :search, on: :collection
     resources :comments, only: [:create, :edit, :update, :destroy]
+
+    resource :article_categories
   end
 
   resources :users, only: [:new, :create] do
@@ -65,6 +67,7 @@ Rails.application.routes.draw do
   resources :sessions
 
   namespace :admin do
+    resources :categories, only: [:index, :create]
     resources :users, only: [:index, :show, :update]
   end
 end

@@ -16,4 +16,8 @@ module ApplicationHelper
 	  end
 	end
 
+	def available_categories article
+	  Category.all.map(&:name) - article.categories.map(&:name)
+	end
+
 end
