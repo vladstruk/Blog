@@ -213,7 +213,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  byebug
+  byebug (= 5.0.0)
   cancan (= 1.6.10)
   capybara-webkit (= 1.5.1)
   coffee-rails (~> 4.1.0)
