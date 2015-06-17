@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150616124203) do
+ActiveRecord::Schema.define(version: 20150617165021) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,9 +23,7 @@ ActiveRecord::Schema.define(version: 20150616124203) do
     t.datetime "updated_at",  null: false
   end
 
-  add_index "article_categories", ["article_id", "category_id"], name: "index_article_categories_on_article_id_and_category_id", using: :btree
-  add_index "article_categories", ["article_id"], name: "index_article_categories_on_article_id", using: :btree
-  add_index "article_categories", ["category_id"], name: "index_article_categories_on_category_id", using: :btree
+  add_index "article_categories", ["article_id", "category_id"], name: "index_article_categories_on_article_id_and_category_id", unique: true, using: :btree
 
   create_table "articles", force: :cascade do |t|
     t.string   "title"
@@ -41,7 +39,7 @@ ActiveRecord::Schema.define(version: 20150616124203) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "categories", ["name"], name: "index_categories_on_name", using: :btree
+  add_index "categories", ["name"], name: "index_categories_on_name", unique: true, using: :btree
 
   create_table "comments", force: :cascade do |t|
     t.string   "content"
@@ -50,6 +48,29 @@ ActiveRecord::Schema.define(version: 20150616124203) do
     t.datetime "updated_at", null: false
     t.integer  "user_id"
   end
+
+  create_table "payment_profiles", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "subscription_id"
+    t.integer  "card_number"
+    t.integer  "cvv"
+    t.date     "expiry_date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "payment_profiles", ["user_id", "subscription_id"], name: "index_payment_profiles_on_user_id_and_subscription_id", unique: true, using: :btree
+  add_index "payment_profiles", ["user_id"], name: "index_payment_profiles_on_user_id", unique: true, using: :btree
+
+  create_table "subscriptions", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "period"
+    t.integer  "price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "subscriptions", ["name"], name: "index_subscriptions_on_name", unique: true, using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
