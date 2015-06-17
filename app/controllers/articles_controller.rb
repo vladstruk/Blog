@@ -24,6 +24,7 @@ class ArticlesController < ApplicationController
 	end
 
 	def show
+	  @article_category = ArticleCategory.new
 	  @comment = Comment.new
 	end
 

@@ -10,7 +10,9 @@ class Ability
       can :update, [Article, Comment]
       can :destroy, [Article, Comment], user_id: user.id
     elsif user.blogger?
-      can :create, ArticleCategory
+      can :create, ArticleCategory do |article_category, article|
+        article.user_id == user.id
+      end
       can :update, [Article, Comment], user_id: user.id
       can :destroy, [Article, Comment], user_id: user.id
     end

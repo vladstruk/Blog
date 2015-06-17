@@ -5,8 +5,8 @@
   Content: <%= @article.content %> </br>
   Category: <%= @article.categories.map(&:name).join(', ') if @article.categories.present? %> </br>
 
-<% if can? :create, ArticleCategory %>
-  <%= form_for ArticleCategory.new, url: article_article_categories_path(@article) do |f| %>
+<% if can? :create, @article_category, @article %>
+  <%= form_for @article_category, url: article_article_categories_path(@article) do |f| %>
     <%=f.label :add_category %>
     <%= f.select :category, available_categories(@article) %> </br>
     <%= f.submit "Add category", class: "btn btn-warning" %>
