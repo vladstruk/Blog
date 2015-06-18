@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
   end
 
   def check_access
-    (Time.now - created_at)/1.day < 14 || (payment_profile.present? && payment_profile.subscription.active?(self))
+    (Time.now - created_at)/1.day <= 14 || payment_profile.try(:has_active_subscription?)
   end
 
   def self.by_login_data params

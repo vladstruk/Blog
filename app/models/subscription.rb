@@ -6,8 +6,4 @@ class Subscription < ActiveRecord::Base
 	validates :period, presence: true
 	validates :price, presence: true
 
-	def active? user
-    (Time.now - user.payment_profile.created_at)/1.day <= period
-  end 
-
 end
