@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150618073028) do
+ActiveRecord::Schema.define(version: 20150618103927) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,12 +53,13 @@ ActiveRecord::Schema.define(version: 20150618073028) do
 
   create_table "payment_profiles", force: :cascade do |t|
     t.integer  "user_id"
-    t.integer  "subscription_id"
+    t.integer  "subscription_id", null: false
     t.integer  "card_number"
     t.integer  "cvv"
     t.date     "expiry_date"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.datetime "subscribed_at",   null: false
   end
 
   add_index "payment_profiles", ["user_id", "subscription_id"], name: "index_payment_profiles_on_user_id_and_subscription_id", unique: true, using: :btree
@@ -93,4 +94,6 @@ ActiveRecord::Schema.define(version: 20150618073028) do
   add_foreign_key "articles", "users"
   add_foreign_key "comments", "articles"
   add_foreign_key "comments", "users"
+  add_foreign_key "payment_profiles", "subscriptions"
+  add_foreign_key "payment_profiles", "users"
 end

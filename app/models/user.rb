@@ -18,7 +18,7 @@ class User < ActiveRecord::Base
      end
   end
 
-  def check_access
+  def has_access?
     (Time.now - created_at)/1.day <= 14 || payment_profile.try(:has_active_subscription?)
   end
 

@@ -22,4 +22,9 @@ class ApplicationController < ActionController::Base
     flash[:error] = exception.message  
     redirect_to articles_path
   end
+
+ def render_404
+   render file: "#{Rails.root}/public/404", layout: false, status: :not_found
+ end
+
 end

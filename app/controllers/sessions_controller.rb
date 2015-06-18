@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
     user = User.by_login_data(params[:session])
     if user.try(:active?)
   	  session[:user_id] = user.id
-      if user.check_access
+      if user.has_access?
   	  flash[:notice] = "You entered to the site!" 
       redirect_to articles_path
       else

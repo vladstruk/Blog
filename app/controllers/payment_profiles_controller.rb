@@ -1,20 +1,20 @@
 class PaymentProfilesController < ApplicationController
 
-  before_filter :find_subscription, only: [:new, :create]
+  before_filter :find_subscription, only: [:new, :create, :update]
 
   def new
-    if @subscription && current_user.payment_profile.nil?
-     @payment_profile = PaymentProfile.new
+    if @subscription 
+      @payment_profile = current_user.payment_profile || PaymentProfile.new
     else
-      flash[:error] = "You are already subscribed."
-      redirect_to subscriptions_path
+      render_404
     end
   end
 
   def create
     if @subscription
-      @payment_profile = @subscription.payment_profiles.build(payment_profiles_params)
-      @payment_profile.user = current_user
+      @payment_profile = current_user.payment_profiles.build(payment_profiles_params)
+      @payment_profile.subscription = @subscription
+      @payment_profile.subscribed_at = Time.now.utc
       if @payment_profile.save
         flash[:notice] = "You subscribed well."
         redirect_to articles_path
@@ -23,8 +23,23 @@ class PaymentProfilesController < ApplicationController
         render :new
       end
     else
-      flash[:error] = "Something went wrong."
-      render :new
+      render_404
+    end
+  end
+
+  def update
+    if @subscription && @payment_profile = PaymentProfile.find_by_id(params[:id])
+      @payment_profile.subscription = @subscription
+      @payment_profile.subscribed_at = Time.now.utc
+      if @payment_profile.update_attributes(payment_profiles_params)
+        flash[:notice] = "You subscribed well."
+        redirect_to articles_path
+      else
+        flash[:error] = "Something went wrong."
+        render :new 
+      end
+    else
+      render_404
     end
   end
 

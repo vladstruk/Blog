@@ -1,4 +1,4 @@
-<%= form_for @payment_profile, url: subscription_payment_profiles_path(@subscription) do |f| %>
+<%= form_for [@subscription, @payment_profile] do |f| %>
 <p>
   <%= f.label :card_number %> </br>
   <%= f.number_field :card_number %>

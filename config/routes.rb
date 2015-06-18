@@ -68,7 +68,7 @@ Rails.application.routes.draw do
   resources :sessions
 
   resources :subscriptions, only: [:index] do
-    resources :payment_profiles, only: [:new, :create]
+    resources :payment_profiles, only: [:new, :create, :update]
   end
 
   namespace :admin do
