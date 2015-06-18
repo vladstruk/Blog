@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
   end
 
   def check_access
-    (Time.now - created_at)/(60*60*24) < 14 || (payment_profile.present? && subscription_active)
+    (Time.now - created_at)/1.day < 14 || (payment_profile.present? && payment_profile.subscription.active?(self))
   end
 
   def self.by_login_data params
@@ -33,10 +33,6 @@ class User < ActiveRecord::Base
   def encrypt_password
   	self.salt = SecureRandom.hex
   	self.password = Encryptor.new(salt).encrypt(password)
-  end
-
-  def subscription_active
-    (Time.now - payment_profile.created_at)/(60*60*24) < payment_profile.subscription.period
   end
 
 end
