@@ -22,8 +22,14 @@
   <% if can? :index, ArticleCategory %>
     <li> <%=link_to "Articles categories", admin_categories_path %>  </li>
   <% end %>
+  <% if can? :new, Subscription %>
+    <li> <%=link_to "Create new subscriptions", new_admin_subscription_path %>  </li>
+  <% end %>
+  <li> <%=link_to "Subscriptions", subscriptions_path %>  </li>
   <li> <%= link_to "Exit", session_path(current_user), method: :delete %> </li>
-  <li class="active" align="right"> <%= "#{current_user.role.capitalize}: #{current_user.name}" %> </li>
+  <li class="active" align="right"> <%= "#{current_user.role.capitalize}: #{current_user.name}"  %> </br>
+                                    <%= "Subscribed" if current_user.payment_profile.present? %>
+  </li>
 <% else %>
   <li> <%= link_to "Sign Up", new_user_path %> </li>
   <li> <%= link_to "Sign In", new_session_path %> </li>

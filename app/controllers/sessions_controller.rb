@@ -6,8 +6,13 @@ class SessionsController < ApplicationController
     user = User.by_login_data(params[:session])
     if user.try(:active?)
   	  session[:user_id] = user.id
+      if user.check_access
   	  flash[:notice] = "You entered to the site!" 
       redirect_to articles_path
+      else
+        flash[:error] = "You have to choose one of the subscriptions."
+        redirect_to subscriptions_path
+      end
   	else
   	  flash[:error] = "Access denied!"
   	  redirect_to new_session_path

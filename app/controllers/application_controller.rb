@@ -18,10 +18,6 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  #rescue_from CanCan::AccessDenied do |exception|
-  #  redirect_to articles_path, :alert => exception.message
-  #end
-
   rescue_from CanCan::AccessDenied do |exception|  
     flash[:error] = exception.message  
     redirect_to articles_path

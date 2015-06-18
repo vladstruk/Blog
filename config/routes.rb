@@ -64,9 +64,15 @@ Rails.application.routes.draw do
   resources :users, only: [:new, :create] do
     get :activation, on: :collection
   end
+
   resources :sessions
 
+  resources :subscriptions, only: [:index] do
+    resources :payment_profiles, only: [:new, :create]
+  end
+
   namespace :admin do
+    resources :subscriptions, only: [:new, :create]
     resources :categories, only: [:index, :create]
     resources :users, only: [:index, :show, :update]
   end

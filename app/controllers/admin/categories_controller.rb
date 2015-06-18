@@ -3,7 +3,7 @@ class Admin::CategoriesController < ApplicationController
 	authorize_resource only: [:index, :create]
 
 	def index
-      @category = Category.new
+    @category = Category.new
 	  @categories = Category.all
 	end
 

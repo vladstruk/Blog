@@ -1,0 +1,17 @@
+<% if @subscriptions.present? %>
+  <h4> Subscriptions </h4>
+  <table class="table table-striped">
+  	<th> Id </th>
+  	<th> Name </th>
+  	<th> Period </th>
+  	<th> Price </th>
+  	<% @subscriptions.each do |subscription| %>
+  		<tr>
+  		  <td> <%= subscription.id %> </td>
+  	    <td> <%= link_to subscription.name, new_subscription_payment_profile_path(subscription) %> </td>
+  	    <td> <%= subscription.period %> </td>
+  	    <td> <%= subscription.price %> </td>
+  		</tr>
+  	<% end %>
+  </table>
+ <% end %> 

@@ -1,0 +1,15 @@
+<%= form_for @payment_profile, url: subscription_payment_profiles_path(@subscription) do |f| %>
+<p>
+  <%= f.label :card_number %> </br>
+  <%= f.number_field :card_number %>
+</p>
+<p>
+  <%= f.label :cvv %> </br>
+  <%= f.number_field :cvv %>
+</p>
+<p>
+  <%= f.label :expiry_date %> </br>
+  <%= f.date_field :expiry_date %>
+</p>
+<%= f.submit %>
+<% end %>
