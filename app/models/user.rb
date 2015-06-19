@@ -18,8 +18,12 @@ class User < ActiveRecord::Base
      end
   end
 
-  def has_access?
-    (Time.now - created_at)/1.day <= 14 || payment_profile.try(:has_active_subscription?)
+  def expiry_time
+    if (Time.now.utc - created_at)/1.day <= Subscription::TRIAL_PERIOD  
+      created_at + Subscription::TRIAL_PERIOD.days
+    else
+      payment_profile.try(:expiry_time) || Time.now.utc
+    end
   end
 
   def self.by_login_data params

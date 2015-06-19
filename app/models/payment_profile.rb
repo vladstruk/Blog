@@ -9,10 +9,14 @@ class PaymentProfile < ActiveRecord::Base
   validates :subscription, presence: true
   validates :subscribed_at, presence: true
   
-  def has_active_subscription?
-    (Time.now.utc - subscribed_at)/1.day <= subscription.period
+  def expiry_time
+    if (Time.now.utc - subscribed_at)/1.day <= subscription.period
+      subscribed_at + subscription.period.days
+    end
   end
-
   
-
+  def subscription= arg
+    self.subscribed_at = Time.now.utc
+    super arg
+  end
 end

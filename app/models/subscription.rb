@@ -1,5 +1,8 @@
 class Subscription < ActiveRecord::Base
 
+	#in days
+	TRIAL_PERIOD = 14
+
 	has_many :payment_profiles
 
 	validates :name, presence: true, uniqueness: true
