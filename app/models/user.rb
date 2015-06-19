@@ -12,6 +12,8 @@ class User < ActiveRecord::Base
 
   before_save :encrypt_password, :if => :password_changed?
 
+  before_create :activation_processing
+
   User::ROLES.each do |role|
     define_method("#{role}?") do
        self.role == role
@@ -33,6 +35,16 @@ class User < ActiveRecord::Base
   end
 
   private
+
+  def activation_processing
+    setting = Setting.find_by_name("Automatic activation")
+    if setting.value == "on"
+      self.active = true
+    else
+      UsersMailer.activate(self).deliver
+    end
+  end
+
 
   def encrypt_password
   	self.salt = SecureRandom.hex

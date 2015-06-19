@@ -1,0 +1,17 @@
+<h4> Settings <h4>
+<table class="table table-striped">
+  <th> Id </th>
+  <th> Name </th>
+  <th> Condition </th>
+  <% @settings.each do |setting| %>
+    <%= form_for setting, url: admin_setting_path(setting) do |f| %>
+      <tr>
+        <td> <%= setting.id %> </td>
+        <td> <%= setting.name %> </td>
+        <td> <%= setting.value %> </td>
+        <td> <%= f.text_field :value %> </td>
+        <td> <%= f.submit %> </td>
+      </tr>
+    <% end %>
+  <% end %>
+</table>

@@ -12,8 +12,7 @@ class UsersController < ApplicationController
       @user.role = "blogger"
       @user.activation_code = SecureRandom.hex
       if @user.save
-        flash[:notice] = "You signed up successfully! Use link in your email to confirm."
-        UsersMailer.activate(@user).deliver
+        flash[:notice] = "You signed up successfully!"
         redirect_to new_session_path
       else
         render :new

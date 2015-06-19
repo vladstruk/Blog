@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150618103927) do
+ActiveRecord::Schema.define(version: 20150619141022) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -64,6 +64,11 @@ ActiveRecord::Schema.define(version: 20150618103927) do
 
   add_index "payment_profiles", ["user_id", "subscription_id"], name: "index_payment_profiles_on_user_id_and_subscription_id", unique: true, using: :btree
   add_index "payment_profiles", ["user_id"], name: "index_payment_profiles_on_user_id", unique: true, using: :btree
+
+  create_table "settings", force: :cascade do |t|
+    t.string "name"
+    t.string "value"
+  end
 
   create_table "subscriptions", force: :cascade do |t|
     t.string   "name"

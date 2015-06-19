@@ -72,6 +72,7 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
+    resources :settings
     resources :subscriptions, only: [:new, :create]
     resources :categories, only: [:index, :create]
     resources :users, only: [:index, :show, :update]
