@@ -18,6 +18,7 @@
     <th> <%= sort_by_field "Id" %> </th>
     <th> <%= sort_by_field "Title" %> </th>
     <th> <%= sort_by_field "Content" %> </th>
+    <th> Rating </th>
     <th> </th>
     <th> </th>
   
@@ -26,6 +27,7 @@
         <td> <%= article.id %> </td>
         <td> <%= link_to article.title, article_path(article) %> </td>
         <td> <%= article.content %> </td>
+        <td> <%= link_to "+", article_ratings_path(article), method: :post %> </td>
 
         <% if can? :update, article %>
           <td> <%= link_to "Edit", edit_article_path(article) %> </td>

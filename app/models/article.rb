@@ -4,6 +4,7 @@ class Article < ActiveRecord::Base
   has_many :comments, dependent: :destroy
   has_many :article_categories
   has_many :categories, through: :article_categories
+  has_many :ratings
 
   validates :title, presence: true
   validates :content, presence: true

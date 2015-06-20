@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
 
   ROLES = ["admin", "moderator", "blogger"]
 
+  has_many :ratings
   has_many :articles, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_one :payment_profile

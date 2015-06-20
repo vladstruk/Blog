@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150619141022) do
+ActiveRecord::Schema.define(version: 20150620115658) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -65,6 +65,14 @@ ActiveRecord::Schema.define(version: 20150619141022) do
   add_index "payment_profiles", ["user_id", "subscription_id"], name: "index_payment_profiles_on_user_id_and_subscription_id", unique: true, using: :btree
   add_index "payment_profiles", ["user_id"], name: "index_payment_profiles_on_user_id", unique: true, using: :btree
 
+  create_table "ratings", force: :cascade do |t|
+    t.boolean "vote"
+    t.integer "article_id"
+    t.integer "user_id"
+  end
+
+  add_index "ratings", ["user_id", "article_id"], name: "index_ratings_on_user_id_and_article_id", unique: true, using: :btree
+
   create_table "settings", force: :cascade do |t|
     t.string "name"
     t.string "value"
@@ -101,4 +109,6 @@ ActiveRecord::Schema.define(version: 20150619141022) do
   add_foreign_key "comments", "users"
   add_foreign_key "payment_profiles", "subscriptions"
   add_foreign_key "payment_profiles", "users"
+  add_foreign_key "ratings", "articles"
+  add_foreign_key "ratings", "users"
 end
