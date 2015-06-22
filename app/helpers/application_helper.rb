@@ -20,4 +20,13 @@ module ApplicationHelper
 	  Category.all.map(&:name) - article.categories.map(&:name)
 	end
 
+	def rating_link article, vote
+		arrow = vote == 1 ? "&#x25B2;" : "&#x25BC;"
+		if article.ratings.any? { |r| r.user_id == current_user.id && r.vote == vote }
+			link_to arrow.html_safe, article_ratings_path(article), method: :delete, class: "red"
+		else
+			link_to arrow.html_safe, article_ratings_path(article, vote: vote), method: :post
+		end
+	end
+
 end

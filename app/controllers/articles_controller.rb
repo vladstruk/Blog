@@ -1,14 +1,14 @@
 class ArticlesController < ApplicationController
 	
-    load_resource only: [:show, :edit, :update, :destroy]
-    authorize_resource only: [:edit, :update, :destroy]
+  load_resource only: [:show, :edit, :update, :destroy]
+  authorize_resource only: [:edit, :update, :destroy]
 
-    def new
-      @article = Article.new
-    end
+  def new
+    @article = Article.new
+  end
 
 	def index
-      @articles = Article.order_by(params)
+     @articles = Article.eager_load(:ratings).order_by(params)
 	end
 
 	def create
@@ -44,8 +44,8 @@ class ArticlesController < ApplicationController
        redirect_to articles_path
 	end
     
-    def search
-      @articles = Article.search_by(params[:search])
+  def search
+    @articles = Article.search_by(params[:search])
 	  unless @articles.present?
 	  	flash[:error] = "There is not article with such title or content."
 	  end

@@ -66,7 +66,7 @@ ActiveRecord::Schema.define(version: 20150620115658) do
   add_index "payment_profiles", ["user_id"], name: "index_payment_profiles_on_user_id", unique: true, using: :btree
 
   create_table "ratings", force: :cascade do |t|
-    t.boolean "vote"
+    t.integer "vote"
     t.integer "article_id"
     t.integer "user_id"
   end

@@ -59,7 +59,7 @@ Rails.application.routes.draw do
     resources :comments, only: [:create, :edit, :update, :destroy]
 
     resource :article_categories
-    resources :ratings, only: [:create]
+    resource :ratings, only: [:create, :destroy]
   end
 
   resources :users, only: [:new, :create] do
